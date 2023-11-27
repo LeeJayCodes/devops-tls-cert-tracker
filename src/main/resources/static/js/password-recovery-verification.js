@@ -1,4 +1,4 @@
-import { displayServerErrorMessages, clearForm, clearServerMessage} from './module.js'
+import { displayServerErrorMessages, clearForm, clearServerMessage, backendDomain } from './module.js'
 
 const forgotPasswordCodeForm = document.querySelector('#recovery-code-form');
 const passwordRecoveryCodeError = document.querySelector('#password-recovery-code-error');
@@ -30,11 +30,13 @@ forgotPasswordCodeForm.addEventListener('submit', async function(e) {
 
 // Calling backend API for sign in
 async function fetchValidatePasswordRecoveryCode(code) {
-    let apiUrl = `/api/auth/validate-password-code?code=${code}`;
+    let apiUrl = `${backendDomain}/api/auth/validate-password-code?code=${code}`;
   
     try {
       const response = await fetch(apiUrl, {
         method: 'GET',
+        credentials: 'include',
+        mode: 'cors',
         headers: {
           'Content-Type': "application/json"
         },

@@ -1,4 +1,4 @@
-import { togglePasswordView, authenticationSubmit, displayServerErrorMessages, displaySuccessMessages, clearForm } from "./module.js";
+import { togglePasswordView, authenticationSubmit, displayServerErrorMessages, displaySuccessMessages, clearForm, backendDomain } from "./module.js";
 
 
 // Adding functioanlity to show password feature
@@ -31,10 +31,12 @@ const code = urlParams.get('code');
 async function fetchResetPassword(passwordInfo) {
   
   // code is retrieved from this JavaScript page not module.js
-  let apiUrl = `/api/auth/password-reset?token=${code}`;
+  let apiUrl = `${backendDomain}/api/auth/password-reset?token=${code}`;
   try {
     const response = await fetch(apiUrl, {
       method: 'POST',
+      credentials: 'include',
+      mode: 'cors',
       headers: {
         'Content-Type': "application/json"
       },

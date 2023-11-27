@@ -1,4 +1,4 @@
-import {userBtn, displayServerErrorMessages, clearServerMessage, signOut, setAttributes, refreshToken, displaySuccessMessages} from "./module.js";
+import {userBtn, displayServerErrorMessages, clearServerMessage, signOut, setAttributes, refreshToken, displaySuccessMessages,backendDomain} from "./module.js";
 
 // Call refresh token to renew the accesstoken if the user hasn't signed out yet
 refreshToken();
@@ -250,11 +250,13 @@ async function fetctAllCertificate() {
   // renew refresh token if access token is expired and user hasn't signed out
   await refreshToken();
 
-  let apiUrl = "/api/certificates/user/all";
+  let apiUrl = `${backendDomain}/api/certificates/user/all`;
 
   try {
     const response = await fetch(apiUrl, {
       method: 'GET',
+      credentials: 'include',
+      mode: 'cors',
       headers: {
         'Content-Type': "application/json"
       }
@@ -284,11 +286,13 @@ async function sendUrlAndFetchCertificate(userInputUrl) {
   // renew refresh token if access token is expired and user hasn't signed out
   await refreshToken();
 
-  let apiUrl = "/api/certificates/add";
+  let apiUrl = `${backendDomain}/api/certificates/add`;
 
   try {
     const response = await fetch(apiUrl, {
       method: 'POST',
+      credentials: 'include',
+      mode: 'cors',
       headers: {
         'Content-Type': "application/json"
       },
@@ -318,10 +322,12 @@ async function fetchDeleteCertificate(certificateId) {
   // renew refresh token if access token is expired and user hasn't signed out
   await refreshToken();
 
-  let apiUrl = `/api/certificates/delete/user/${certificateId}`;
+  let apiUrl = `${backendDomain}/api/certificates/delete/user/${certificateId}`;
   try {
     const response = await fetch(apiUrl, {
       method: 'DELETE',
+      credentials: 'include',
+      mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
       }
@@ -354,11 +360,13 @@ async function fetchCertificateById(certificateId) {
   // renew refresh token if access token is expired and user hasn't signed out
   await refreshToken();
 
-  let apiUrl = `/api/certificates/get/${certificateId}`;
+  let apiUrl = `${backendDomain}/api/certificates/get/${certificateId}`;
 
   try {
     const response = await fetch(apiUrl, {
       method: 'GET',
+      credentials: 'include',
+      mode: 'cors',
       headers: {
         'Content-Type': "application/json"
       }

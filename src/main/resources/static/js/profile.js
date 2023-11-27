@@ -1,4 +1,4 @@
-import { userBtn, togglePasswordView, authenticationSubmit, displayServerErrorMessages, displaySuccessMessages, signOut, refreshToken, clearForm } from "./module.js";
+import { userBtn, togglePasswordView, authenticationSubmit, displayServerErrorMessages, displaySuccessMessages, signOut, refreshToken, clearForm, backendDomain } from "./module.js";
 
 // Call refresh token to renew the accesstoken if the user hasn't signed out yet
 refreshToken();
@@ -45,10 +45,12 @@ async function fetctChangePassword(passwordInfo) {
   // renew refresh token if access token is expired and user hasn't signed out
   await refreshToken();
 
-  let apiUrl = "/api/users/change-password";
+  let apiUrl = `${backendDomain}/api/users/change-password`;
   try {
     const response = await fetch(apiUrl, {
       method: 'PATCH',
+      credentials: 'include',
+      mode: 'cors',
       headers: {
         'Content-Type': "application/json"
       },

@@ -1,3 +1,6 @@
+// Global Variable for backend endpoint domain name
+export const backendDomain = "http://localhost:8080"
+
 // sign out functionality for sign out link on user button overlay
 export function signOut(){
     const signOutBtn = document.querySelector(`.signOut`);
@@ -172,11 +175,13 @@ export function setAttributes(el, attrs) {
 // Interact with sign out end point
 async function fetctSignOut() {
 
-    let apiUrl = "/api/auth/signout";
+    let apiUrl = `${backendDomain}/api/auth/signout`;
   
     try {
       const response = await fetch(apiUrl, {
         method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
         headers: {
           'Content-Type': "application/json"
         },
@@ -195,11 +200,13 @@ async function fetctSignOut() {
 
   // Interact with refresh token end point to renew access token
   export async function refreshToken(){
-        let apiUrl = "/api/auth/refreshtoken";
+        let apiUrl = `${backendDomain}/api/auth/refreshtoken`;
       
         try {
           const response = await fetch(apiUrl, {
             method: 'POST',
+            credentials: 'include',
+            mode: 'cors',
             headers: {
               'Content-Type': "application/json"
             },
@@ -217,11 +224,13 @@ async function fetctSignOut() {
 
   // Interact with refresh token and redirect user depending on the result
   export async function refreshTokenPageRedirection(htmlPage){
-    let apiUrl = "/api/auth/refreshtoken"
+    let apiUrl = `${backendDomain}/api/auth/refreshtoken`;
   
     try {
       const response = await fetch(apiUrl, {
         method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
         headers: {
           'Content-Type': "application/json"
         },

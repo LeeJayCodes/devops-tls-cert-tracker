@@ -1,4 +1,4 @@
-import {authenticationSubmit, displaySuccessMessages, displayServerErrorMessages} from './module.js'
+import {authenticationSubmit, displaySuccessMessages, displayServerErrorMessages, backendDomain} from './module.js'
 
 const forgotPasswordForm = document.querySelector('#recovery-email-form');
 
@@ -6,11 +6,13 @@ authenticationSubmit(forgotPasswordForm, fetchPasswordRecovery);
 
 // Calling backend API for sign in
 async function fetchPasswordRecovery(emailData) {
-    let apiUrl = "/api/auth/password-reset-request";
+    let apiUrl = `${backendDomain}/api/auth/password-reset-request`;
   
     try {
       const response = await fetch(apiUrl, {
         method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
         headers: {
           'Content-Type': "application/json"
         },

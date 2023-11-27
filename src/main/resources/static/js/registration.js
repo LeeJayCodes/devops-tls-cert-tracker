@@ -1,4 +1,4 @@
-import {authenticationSubmit, togglePasswordView, displayServerErrorMessages, displaySuccessMessages, clearForm} from "./module.js";
+import {authenticationSubmit, togglePasswordView, displayServerErrorMessages, displaySuccessMessages, clearForm, backendDomain} from "./module.js";
 
 // form submit will trigger validation, if no there are no errors, sbumit the form
 const registrationForm = document.querySelector("#register-form");
@@ -25,11 +25,13 @@ passwordConfirmIcon.addEventListener("click", () => {
 // Calling backend API for registration
 async function fetchRegister(registrationInfo) {
     
-    let apiUrl = "/api/auth/register";
+    let apiUrl = `${backendDomain}/api/auth/register`;
   
     try {
       const response = await fetch(apiUrl, {
         method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
         headers: {
           'Content-Type': "application/json"
         },

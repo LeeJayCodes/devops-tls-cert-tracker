@@ -1,4 +1,4 @@
-import { authenticationSubmit, togglePasswordView, displayServerErrorMessages, refreshTokenPageRedirection, clearForm, refreshToken } from "./module.js";
+import { authenticationSubmit, togglePasswordView, displayServerErrorMessages, refreshTokenPageRedirection, clearForm, backendDomain } from "./module.js";
 
 // Protecting the page and redirecting the user to correct page depending on user status (signed in, or not signed in)
 refreshTokenPageRedirection('./dashboard.html');
@@ -22,11 +22,13 @@ passwordIcon.addEventListener("click", () => {
 // Calling backend API for sign in
 async function fetchSignIn(signinData) {
   
-    let apiUrl = "/api/auth/signin"
+    let apiUrl = `${backendDomain}/api/auth/signin`
   
     try {
       const response = await fetch(apiUrl, {
         method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
         headers: {
           'Content-Type': "application/json"
         },
