@@ -4,12 +4,13 @@
   "description": "DevOps Student Project - Fall 2023\r Makes a page to track certifcates so you don't forget to renew them.",
   "main": "index.js",
   "scripts": {
-    "test-dashboard": "mocha src/test/frontend/selenium/testcases/homepagetest.js --timeout 200000",
-    "test-landingpage": "mocha src/test/frontend/selenium/testcases/landingpagetest.js --timeout 200000",
-    "api-test": "mocha src/test/frontend/apitesting/apitest.js --timeout 60000",
-    "test-registration": "mocha src/test/frontend/selenium/testcases/registrationpagetest.js --timeout 60000",
-    "test-signin": "mocha src/test/frontend/selenium/testcases/signinpagetest.js --timeout 60000",
-    "test-profile": "mocha src/test/frontend/selenium/testcases/profilepagetest.js",
+    "test-dashboard": "mocha test/selenium/testcases/homepagetest.js --timeout 200000",
+    "test-landingpage": "mocha test/selenium/testcases/landingpagetest.js --timeout 200000",
+    "api-test": "mocha test/apitesting/apitest.js --timeout 60000",
+    "test-registration": "mocha test/selenium/testcases/registrationpagetest.js --timeout 60000",
+    "test-signin": "mocha test/selenium/testcases/signinpagetest.js --timeout 60000",
+    "test-profile": "mocha test/selenium/testcases/profilepagetest.js",
+    "test-javascript":"mocha test/javascript/test.js",
     "test": "npm run test-dashboard && npm run test-landingpage && npm run api-test && npm run test-registration && npm run test-signin && npm run test-profile"
 
   },
