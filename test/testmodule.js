@@ -2,14 +2,8 @@
 export function signOut(){
     const signOutBtn = document.querySelector(`.signOut`);
     signOutBtn.addEventListener('click', ()=>{
-        let signOutConfirmation = confirm("Are you signing out?");
-        if (signOutConfirmation){
-            
-            // call sign out api here
-
             // redirect user to landing page if signed out.
-            location.href="./certificate-tracker.html";
-        }
+            location.href="./index.html";
         
     })
     

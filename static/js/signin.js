@@ -71,7 +71,12 @@ async function fetchSignIn(signinData) {
         // If the user is successfully signed in, save user info in local storage
         localStorage.setItem('user', JSON.stringify(data));
         // and redirect the user to the dashboard page
-        location.href = "./dashboard.html";
+        if(signinPageLanguage == 'en'){
+          location.href = "./dashboard.html";
+        } else {
+          location.href = "./tableau.html";
+        }
+        
       }
   
     } catch (error) {

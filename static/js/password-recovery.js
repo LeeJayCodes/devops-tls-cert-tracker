@@ -1,4 +1,4 @@
-import {authenticationSubmit, displaySuccessMessages, displayServerErrorMessages, backendDomain} from './module.js'
+import {authenticationSubmit, displaySuccessMessages, backendDomain} from './module.js'
 
 const forgotPasswordForm = document.querySelector('#recovery-email-form');
 
@@ -10,11 +10,11 @@ var recoveryEmailString, recoveryDestinationURL;
 switch (passwordRecovery2PageLanguage) {
     case "en":
         recoveryEmailString = "Recovery email has sent to you ";
-        recoveryDestinationURL = "/password-recovery-verification.html";
+        recoveryDestinationURL = "./password-recovery-verification.html";
         break;
     case "fr":
         recoveryEmailString = "Un courriel de récupération vous a été envoyé ";
-        recoveryDestinationURL = "/recuperation-vertification.html";
+        recoveryDestinationURL = "./recuperation-vertification.html";
         break;
     default:
         recoveryEmailString = "Recovery email has sent to you ";

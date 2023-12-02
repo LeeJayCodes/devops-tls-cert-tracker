@@ -75,7 +75,7 @@ export function getCookie(name) {
 
 // generic form behavior for sign in, registration, password change (relevant to authentication)
 export function authenticationSubmit(form, api){
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit',async function(e) {
         e.preventDefault();
 
         clearServerMessage()
@@ -84,6 +84,9 @@ export function authenticationSubmit(form, api){
         if(!$(this).valid()){
             return ;
         } else {
+
+        const loadingImg = document.querySelector('.loadingImg');
+        loadingImg.classList.remove("hidden");
         // Convert form data into JSON data
         const formData = new FormData(this);
         if(formData.has('password-confirm')){
@@ -94,8 +97,8 @@ export function authenticationSubmit(form, api){
         formData.forEach(function(key, value) {
             formJsonData[value] = key;
         });
-        api(formJsonData);
-            
+        await api(formJsonData);
+        loadingImg.classList.add("hidden"); 
         }       
     });
 }
@@ -204,11 +207,21 @@ async function fetctSignOut() {
         },
       });
       const data = await response.json();
-      if(!response.ok){
+      if(response.ok){
+        switch (pageLanguage) {
+          case "en":
+            location.href="../index-en.html";
+              break;
+          case "fr":
+            location.href="../index-fr.html";
+              break;
+          default:
+            location.href="../index.html";
+      }
+      } else {
         displayServerErrorMessages(data.error);
         throw data;
-      } else {
-        location.href="../index.html";
+        
       }
     } catch (error) {
       console.error("Error fetching JSON data (Sign Out):", error);
@@ -230,9 +243,16 @@ async function fetctSignOut() {
           });
           const data = await response.json();
           if(!response.ok){
-            location.href="../index.html";
-          } else {
-            // location.reload();
+            switch (pageLanguage) {
+              case "en":
+                location.href="../index-en.html";
+                  break;
+              case "fr":
+                location.href="../index-fr.html";
+                  break;
+              default:
+                location.href="../index.html";
+          }
           }
         } catch (error) {
           console.error("Error fetching JSON data (Sign in):", error);
