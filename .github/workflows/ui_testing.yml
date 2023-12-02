@@ -1,0 +1,40 @@
+name: Cert Tracker frontend CI
+
+on:
+  push:
+    branches:
+      - '*'
+  
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  front_end:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+    - name: Step 1 - Checkout the main GitHub branch
+      uses: actions/checkout@v3
+
+    - name: Step 2 - Set up Node.js for Selenium
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Step 3 - Install node.js dependencies
+      run: npm install
+
+    - name: Step 5 - start web server for testing frontend
+      run: bash node test-server.js &
+
+
+    - name: Wait for express server to start
+      run: sleep 3  # Wait for 5 seconds to ensure live-server is up
+
+    - name: Run frontend puppeteer UI testing
+      run: npm test
+
