@@ -20,7 +20,7 @@ jobs:
     - name: Step 1 - Checkout the main GitHub branch
       uses: actions/checkout@v3
 
-    - name: Step 2 - Set up Node.js for Selenium
+    - name: Step 2 - Set up Node.js
       uses: actions/setup-node@v3
       with:
         node-version: 18
@@ -29,12 +29,11 @@ jobs:
       run: npm install
 
     - name: Step 5 - start web server for testing frontend
-      run: bash node test-server.js &
+      run: node test-server.js &
 
+    - name: Wait for server to start
+      run: sleep 3
 
-    - name: Wait for express server to start
-      run: sleep 3  # Wait for 5 seconds to ensure live-server is up
-
-    - name: Run frontend puppeteer UI testing
+    - name: Run frontend puppeteer UI testing and API test
       run: npm test
 
